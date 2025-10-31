@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --pink-100: #ffd6e8;
+  --pink-200: #ffb3d1;
+  --pink-300: #ff85b3;
+  --pink-400: #ff4f90;
+  --pink-500: #ff2b7a;
+  --muted: #666;
+  --card-bg: #fff0f6;
+  --shadow: 0 6px 18px rgba(255,43,122,0.12);
+  --radius: 12px;
+  --max-width: 1200px;
+  font-family: 'Poppins', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#fff 0%, #fff0f6 100%); color: #2a1a24; }
+
+.app-container { max-width: var(--max-width); margin: 24px auto; padding: 16px; }
+
+/* Header */
+.header {
+  background: linear-gradient(90deg,var(--pink-100), var(--pink-300));
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.header-inner h1 { margin:0; font-size: 1.6rem; color: #4b0026; }
+.tagline { margin:4px 0 0; color: var(--muted); }
+
+/* Layout */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 16px;
+}
+.left-panel { background: linear-gradient(180deg,#ffffff, #fff7fb); padding: 12px; border-radius: var(--radius); }
+.right-panel { padding: 12px; }
+
+/* Search form */
+.search-form fieldset { border: 1px dashed rgba(255,43,122,0.12); padding: 12px; border-radius: 10px; }
+.search-form legend { 
+  padding: 0 12px; 
+  color: var(--pink-500); 
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.field { display: flex; flex-direction: column; margin-bottom: 10px; }
+.field span { font-size: 0.9rem; color: #4b0026; margin-bottom: 6px; }
+.field input[type="search"], .field input[type="number"], .field select {
+  padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(255,43,122,0.12);
+  outline: none;
+}
+
+/* Custom dropdown styling */
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff2b7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 36px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.field select:hover {
+  border-color: var(--pink-300);
+  background-color: var(--pink-100);
+}
+
+.field input:focus, .field select:focus { 
+  box-shadow: 0 0 0 3px rgba(255,43,122,0.08); 
+  border-color: var(--pink-400); 
+}
+
+.inline-field { display:flex; align-items:center; gap:8px; margin-bottom: 8px; color: #4b0026; }
+.actions { 
+  display: flex; 
+  gap: 24px; 
+  margin-top: 16px;
+  padding: 8px 0;
+}
+.btn { 
+  background: var(--pink-500); 
+  color: white; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  box-shadow: 0 4px 8px rgba(255,43,122,0.12); 
+}
+.btn.ghost { background: transparent; border: 1px solid var(--pink-300); color: var(--pink-500); }
+.btn.small { padding: 6px 8px; font-size: 0.85rem; }
+.btn.danger { background: #ff7b92; }
+.btn.disabled { opacity: 0.6; pointer-events: none; }
+
+/* Sort row */
+.sort-row { display:flex; gap:12px; align-items:center; margin-top:12px; margin-bottom: 8px; flex-wrap:wrap; }
+.sort-row label { display:flex; gap:6px; align-items:center; }
+
+/* Custom sort dropdown styling */
+.sort-row select {
+  appearance: none;
+  background-color: white;
+  border: 1px solid var(--pink-300);
+  border-radius: 8px;
+  padding: 6px 32px 6px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff2b7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.sort-row select:hover {
+  background-color: var(--pink-100);
+  border-color: var(--pink-400);
+}
+
+.sort-row select:focus {
+  outline: none;
+  border-color: var(--pink-500);
+  box-shadow: 0 0 0 3px rgba(255,43,122,0.15);
+}
+
+/* Styling dropdown options */
+.sort-row select option {
+  background-color: white;
+  color: #4b0026;
+  padding: 12px;
+}
+
+.sort-row select option:hover,
+.sort-row select option:focus {
+  background-color: var(--pink-100);
+}
+
+/* Table */
+.table-area { margin-top: 12px; }
+.data-table table { width:100%; border-collapse: collapse; }
+.data-table thead th { text-align:left; padding: 8px; background: linear-gradient(90deg,#fff0f6,#fff); border-bottom: 2px solid rgba(255,43,122,0.06); }
+.data-table tbody td { padding: 8px; vertical-align: middle; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.artwork-cell img { width:60px; height:60px; border-radius:8px; object-fit:cover; }
+.track-title { font-weight:600; cursor:pointer; color:#4b0026; }
+.track-title:focus, .track-title:hover { text-decoration: underline; outline:none; }
+
+/* Detail and playlist (right) */
+.detail-card, .playlist-card { background: var(--card-bg); padding:12px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 12px; }
+.detail-inner { display:flex; gap:12px; align-items:flex-start; }
+.detail-inner img { width:100px; height:100px; border-radius:8px; object-fit:cover; }
+.detail-meta h4 { margin:0 0 6px; }
+.small { font-size:0.85rem; }
+.muted { color: var(--muted); }
+
+/* Playlist summary styling */
+.playlist-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+.playlist-summary strong {
+  margin-right: 8px;
+}
+
+/* Playlist list */
+.playlist-list { list-style:none; padding:0; margin:0; max-height: 40vh; overflow:auto; }
+.playlist-item { display:flex; gap:8px; align-items:center; padding:8px; border-bottom:1px solid rgba(0,0,0,0.03); }
+.playlist-item img { width:48px; height:48px; border-radius:6px; }
+.playlist-item .meta { flex:1; }
+.playlist-item .controls { display:flex; gap:8px; align-items:center; }
+
+/* Footer */
+.footer { 
+  text-align: center; 
+  margin-top: 8px; 
+  color: var(--muted); 
+  font-size: 0.75rem; /* smaller footer text */
+  padding: 6px 0;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .right-panel { order: 2; }
+  .left-panel { order: 1; }
+}
