@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812">
+  <rect width="100%" height="100%" fill="#fff0f6"/>
+  <text x="20" y="60" font-family="Poppins, Arial, sans-serif" font-size="18" fill="#4b0026">Mobile view (placeholder)</text>
+  <rect x="20" y="90" width="335" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+  <rect x="20" y="150" width="335" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+  <rect x="20" y="210" width="335" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+</svg>

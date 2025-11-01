@@ -121,7 +121,7 @@ export default function App() {
             </label>
             <div className="playlist-summary">
               <strong>Playlist:</strong> {playlist.length} tracks
-              <button className="btn small" onClick={() => {
+              <button className="btn small" aria-label="Export playlist as JSON" title="Export playlist" onClick={() => {
                 // export playlist JSON
                 const blob = new Blob([JSON.stringify(playlist, null, 2)], { type: "application/json" });
                 const url = URL.createObjectURL(blob);
@@ -131,7 +131,7 @@ export default function App() {
                 a.click();
                 URL.revokeObjectURL(url);
               }}>Export</button>
-              <button className="btn small danger" onClick={clearPlaylist} disabled={playlist.length===0}>Clear</button>
+              <button className="btn small danger" aria-label="Clear playlist" title="Clear playlist" onClick={clearPlaylist} disabled={playlist.length===0}>Clear</button>
             </div>
           </div>
 

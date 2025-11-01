@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700">
+  <rect width="100%" height="100%" fill="#fff0f6"/>
+  <rect x="40" y="40" width="1120" height="620" rx="12" fill="#fff" stroke="#ffb3d1" stroke-width="4"/>
+  <text x="80" y="120" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4b0026">Search form (placeholder)</text>
+  <text x="80" y="180" font-family="Poppins, Arial, sans-serif" font-size="18" fill="#6b2a3a">Shows Keyword, Media, Genre, Limit, Include explicit</text>
+  <g transform="translate(80,220)">
+    <rect width="420" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+    <rect x="0" y="64" width="320" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+    <rect x="0" y="128" width="240" height="44" rx="8" fill="#fff" stroke="#ffd6e8"/>
+  </g>
+</svg>

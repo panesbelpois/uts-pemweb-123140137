@@ -49,8 +49,13 @@ my-app/
 
 Deployment: [paste Vercel link di sini]
 
-Contoh cara menambah screenshot (letakkan file di `public/` atau di repo root):
-![screenshot](./screenshot.png)
+Contoh cara menambah screenshot (letakkan file di `public/screenshots/`):
+![Search form](./public/screenshots/screenshot-01-search-form.svg)
+![Results table](./public/screenshots/screenshot-02-results.svg)
+![Detail preview](./public/screenshots/screenshot-03-detail-preview.svg)
+![Playlist](./public/screenshots/screenshot-04-playlist.svg)
+![Mobile view](./public/screenshots/screenshot-05-mobile.svg)
+![Error / Loading](./public/screenshots/screenshot-06-error.svg)
 
 ## Catatan
 - Aplikasi menggunakan iTunes Search API, jadi beberapa media types atau country mungkin mengembalikan sedikit hasil tergantung query.
