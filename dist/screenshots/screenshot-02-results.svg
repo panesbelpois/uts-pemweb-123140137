@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700">
+  <rect width="100%" height="100%" fill="#fff7fb"/>
+  <text x="60" y="80" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4b0026">Search results (placeholder)</text>
+  <g transform="translate(60,120)">
+    <rect width="1040" height="40" fill="#ffeef6" stroke="#ffb3d1"/>
+    <rect y="60" width="1040" height="44" fill="#fff" stroke="#ffe6ef"/>
+    <rect y="120" width="1040" height="44" fill="#fff" stroke="#ffe6ef"/>
+    <rect y="180" width="1040" height="44" fill="#fff" stroke="#ffe6ef"/>
+  </g>
+  <text x="80" y="220" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#6b2a3a">Artwork | Track | Artist | Price | Preview | Action</text>
+</svg>

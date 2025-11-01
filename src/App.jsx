@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 import SearchForm from "./components/SearchForm";
 import DataTable from "./components/DataTable";
 import DetailCard from "./components/DetailCard";
@@ -99,10 +100,13 @@ export default function App() {
   const clearPlaylist = () => setPlaylist([]);
 
   return (
-    <div className="app-container">
+    <div className="app-container spotify-app">
       <Header />
       <main className="main-grid">
-        <section className="left-panel">
+        <nav className="spotify-sidebar" aria-label="Main navigation">
+          <Sidebar />
+        </nav>
+        <section className="left-panel content-area">
           <SearchForm onSearch={setQueryParams} loading={loading} />
           <div className="sort-row">
             <label>

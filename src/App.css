@@ -19,6 +19,19 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
 
 .app-container { max-width: var(--max-width); margin: 24px auto; padding: 16px; }
 
+/* Spotify-like dark theme wrapper */
+.spotify-app {
+  max-width: 1400px; /* allow wider layout */
+  margin: 16px auto;
+  padding: 0; /* full-bleed feel inside */
+  background: linear-gradient(180deg,#fff 0%, #fff0f6 40%, #ffeef8 100%);
+  color: #2a1a24;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(255,43,122,0.08);
+}
+
+.spotify-app .header { background: linear-gradient(90deg,var(--pink-100), var(--pink-300)); padding: 18px 28px; border-radius: 8px 8px 0 0; }
+
 /* Header */
 .header {
   background: linear-gradient(90deg,var(--pink-100), var(--pink-300));
@@ -36,8 +49,35 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
   grid-template-columns: 1fr 340px;
   gap: 16px;
 }
+
+/* When using spotify-app, change grid to include sidebar */
+.spotify-app .main-grid {
+  grid-template-columns: 220px 1fr 360px;
+  gap: 20px;
+  align-items: start;
+}
 .left-panel { background: linear-gradient(180deg,#ffffff, #fff7fb); padding: 12px; border-radius: var(--radius); }
+.content-area { background: transparent; padding: 28px; }
 .right-panel { padding: 12px; }
+
+/* Sidebar styling for spotify theme */
+.spotify-sidebar { background: transparent; padding: 0 0 20px 0; }
+.sidebar-inner { padding: 22px 18px; color: #4b0026; min-height: 420px; }
+.sidebar-inner .logo { font-weight: 800; font-size: 1.25rem; color: var(--pink-500); margin-bottom: 18px; }
+.sidebar-inner .nav { list-style: none; padding: 0; margin: 0 0 18px 0; }
+.sidebar-inner .nav-item { padding: 10px 8px; border-radius: 6px; cursor: pointer; color: #6b2438; }
+.sidebar-inner .nav-item.active, .sidebar-inner .nav-item:hover { background: rgba(255,43,122,0.08); color: #4b0026; }
+.sidebar-inner .playlists h4 { margin: 14px 0 8px; color: #7a2b45; font-size: 0.95rem; }
+.sidebar-inner .playlists ul { list-style:none; padding:0; margin:0; }
+.sidebar-inner .playlists li { padding:6px 0; color:#5a2433; font-size:0.95rem; cursor:pointer; }
+.sidebar-footer { margin-top:24px; color:#7a2b45; }
+
+/* Make cards align with pink theme */
+.spotify-app .detail-card, .spotify-app .playlist-card, .spotify-app .left-panel { background: linear-gradient(180deg,#fff,#fff7fb); box-shadow: var(--shadow); border-radius: 12px; color: #2a1a24; }
+.spotify-app .data-table thead th { color: #4b0026; }
+.spotify-app .track-title { color: #4b0026; }
+.spotify-app .btn { background: var(--pink-500); box-shadow: 0 6px 18px rgba(255,43,122,0.12); }
+.spotify-app .btn.ghost { background: transparent; color: var(--pink-500); border-color: rgba(255,43,122,0.12); }
 
 /* Search form */
 .search-form fieldset { border: 1px dashed rgba(255,43,122,0.12); padding: 12px; border-radius: 10px; }
