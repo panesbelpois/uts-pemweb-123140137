@@ -93,6 +93,8 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
 .spotify-app .track-title { color: #4b0026; }
 .spotify-app .btn { background: var(--pink-500); box-shadow: 0 6px 18px rgba(255,43,122,0.12); }
 .spotify-app .btn.ghost { background: transparent; color: var(--pink-500); border-color: rgba(255,43,122,0.12); }
+.spotify-app .btn.ghost.liked { color: var(--pink-500); transform: scale(1.2); }
+.spotify-app .btn.ghost:hover { background: rgba(255,43,122,0.08); }
 
 /* NAV / BUTTON baseline styles */
 .nav-link:focus,

@@ -180,8 +180,9 @@ export default function App() {
                 {!loading && !error && <DataTable
                   results={results}
                   onSelect={setSelected}
-                  onAddToPlaylist={(t) => handleAddToPlaylist(t, activePlaylist)}
+                  onAddToPlaylist={(t, target) => handleAddToPlaylist(t, target || activePlaylist)}
                   playlist={playlists[activePlaylist] || []}
+                  likedSongs={playlists["Liked Songs"] || []}
                 />}
               </div>
             </>

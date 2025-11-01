@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DataTable({ results, onSelect, onAddToPlaylist, playlist }) {
+export default function DataTable({ results, onSelect, onAddToPlaylist, playlist, likedSongs }) {
   if (!results || results.length === 0) {
     return <div className="empty">No results yet. Try a search.</div>;
   }
@@ -8,6 +8,11 @@ export default function DataTable({ results, onSelect, onAddToPlaylist, playlist
   const isInPlaylist = (track) => {
     const id = track.trackId ?? track.collectionId;
     return playlist.some(p => (p.trackId ?? p.collectionId) === id);
+  };
+
+  const isLiked = (track) => {
+    const id = track.trackId ?? track.collectionId;
+    return likedSongs.some(p => (p.trackId ?? p.collectionId) === id);
   };
 
   return (
@@ -20,6 +25,7 @@ export default function DataTable({ results, onSelect, onAddToPlaylist, playlist
             <th>Artist</th>
             <th>Price</th>
             <th>Preview</th>
+            <th>Like</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -43,6 +49,15 @@ export default function DataTable({ results, onSelect, onAddToPlaylist, playlist
                 {item.previewUrl ? (
                   <audio controls src={item.previewUrl} preload="none" />
                 ) : <span className="muted">No preview</span>}
+              </td>
+              <td>
+                <button
+                  className={`btn small ghost ${playlist.some(p => (p.trackId ?? p.collectionId) === (item.trackId ?? item.collectionId)) ? "liked" : ""}`}
+                  onClick={() => onAddToPlaylist(item, "Liked Songs")}
+                  title="Add to Liked Songs"
+                >
+                  ♥
+                </button>
               </td>
               <td>
                 <button
