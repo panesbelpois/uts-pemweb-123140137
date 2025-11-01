@@ -38,17 +38,33 @@ export default function Sidebar({ active, onNavigate, playlists = {}, onSelectPl
 
       <div className="playlists">
         <h4>Playlists</h4>
-        <ul>
+        <ul className="nav playlist-nav">
           {Object.keys(playlists).map((name) => (
-            <li key={name}>
-              <button type="button" className={`nav-item playlist-link ${active === name ? "active" : ""}`} onClick={() => onSelectPlaylist && onSelectPlaylist(name)}>{name}</button>
+            <li key={name} className="nav-item">
+              <button 
+                type="button" 
+                className={`nav-link ${active === name ? "active" : ""}`} 
+                onClick={() => onSelectPlaylist && onSelectPlaylist(name)}
+              >
+                {name}
+              </button>
             </li>
           ))}
         </ul>
 
-        <form onSubmit={handleCreate} style={{ marginTop: 12 }}>
-          <input aria-label="New playlist name" value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Create playlist..." />
-          <button type="submit" className="btn small" style={{ marginLeft: 8 }}>Add</button>
+        <form onSubmit={handleCreate} className="create-playlist-form">
+          <div className="input-group">
+            <input 
+              aria-label="New playlist name"
+              className="playlist-input"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              placeholder="Create playlist..."
+            />
+            <button type="submit" className="nav-link create-btn">
+              Add
+            </button>
+          </div>
         </form>
       </div>
 
