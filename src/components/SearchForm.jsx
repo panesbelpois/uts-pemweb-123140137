@@ -19,8 +19,13 @@ const DEFAULT = {
   explicit: false,
 };
 
-export default function SearchForm({ onSearch, loading }) {
+export default function SearchForm({ onSearch, loading, focus }) {
   const [form, setForm] = useState(DEFAULT);
+  const inputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (focus && inputRef.current) inputRef.current.focus();
+  }, [focus]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +54,7 @@ export default function SearchForm({ onSearch, loading }) {
             required
             placeholder="Song, artist, album..."
             aria-label="Search keyword"
+            ref={inputRef}
             onChange={(e) => setForm(f => ({ ...f, term: e.target.value }))}
           />
         </label>

@@ -1,22 +1,38 @@
 import React from "react";
 
-export default function Sidebar() {
+const NAV_ITEMS = [
+  { id: "home", label: "Home" },
+  { id: "search", label: "Search" },
+  { id: "library", label: "Your Library" },
+];
+
+const PLAYLIST_SHORTCUTS = [
+  { id: "liked", label: "Liked Songs" },
+  { id: "chill", label: "Chill Vibes" },
+  { id: "top", label: "Top Hits" },
+  { id: "mix", label: "My Mix" },
+];
+
+export default function Sidebar({ active, onNavigate }) {
   return (
     <div className="sidebar-inner">
       <div className="logo">PaneStify</div>
-      <ul className="nav">
-        <li className="nav-item active">Home</li>
-        <li className="nav-item">Search</li>
-        <li className="nav-item">Your Library</li>
+      <ul className="nav" role="menubar" aria-label="Main">
+        {NAV_ITEMS.map((it) => (
+          <li key={it.id} className={`nav-item ${active === it.id ? "active" : ""}`}>
+            <button type="button" className="nav-link" aria-current={active === it.id ? "page" : undefined} onClick={() => onNavigate && onNavigate(it.id)}>{it.label}</button>
+          </li>
+        ))}
       </ul>
 
       <div className="playlists">
         <h4>Playlists</h4>
         <ul>
-          <li>Liked Songs</li>
-          <li>Chill Vibes</li>
-          <li>Top Hits</li>
-          <li>My Mix</li>
+          {PLAYLIST_SHORTCUTS.map(p => (
+            <li key={p.id}>
+              <button type="button" className={`nav-item playlist-link ${active === p.id ? "active" : ""}`} onClick={() => onNavigate && onNavigate(p.id)}>{p.label}</button>
+            </li>
+          ))}
         </ul>
       </div>
 

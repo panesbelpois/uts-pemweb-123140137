@@ -14,6 +14,7 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [playlist, setPlaylist] = useState(loadPlaylistFromStorage());
   const [sortBy, setSortBy] = useState({ key: "releaseDate", dir: "desc" });
+  const [page, setPage] = useState("home");
 
   useEffect(() => {
     savePlaylistToStorage(playlist);
@@ -99,15 +100,120 @@ export default function App() {
 
   const clearPlaylist = () => setPlaylist([]);
 
+  const handleNavigate = (p) => {
+    setPage(p);
+  };
+
   return (
     <div className="app-container spotify-app">
       <Header />
       <main className="main-grid">
         <nav className="spotify-sidebar" aria-label="Main navigation">
-          <Sidebar />
+          <Sidebar active={page} onNavigate={handleNavigate} />
         </nav>
         <section className="left-panel content-area">
-          <SearchForm onSearch={setQueryParams} loading={loading} />
+          {page === "search" ? (
+            <>
+              <SearchForm onSearch={setQueryParams} loading={loading} focus={true} />
+              <div className="sort-row">
+                <label>
+                  Sort by:
+                  <select value={sortBy.key} onChange={(e) => setSortBy(s => ({ ...s, key: e.target.value }))}>
+                    <option value="releaseDate">Release Date</option>
+                    <option value="price">Price</option>
+                  </select>
+                </label>
+                <label>
+                  Direction:
+                  <select value={sortBy.dir} onChange={(e) => setSortBy(s => ({ ...s, dir: e.target.value }))}>
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                  </select>
+                </label>
+                <div className="playlist-summary">
+                  <strong>Playlist:</strong> {playlist.length} tracks
+                  <button className="btn small" aria-label="Export playlist as JSON" title="Export playlist" onClick={() => {
+                    const blob = new Blob([JSON.stringify(playlist, null, 2)], { type: "application/json" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `playlist.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                  }}>Export</button>
+                  <button className="btn small danger" aria-label="Clear playlist" title="Clear playlist" onClick={clearPlaylist} disabled={playlist.length===0}>Clear</button>
+                </div>
+              </div>
+
+              <div className="table-area">
+                {loading && <div className="status">Loading...</div>}
+                {error && <div className="status error">Error: {error}</div>}
+                {!loading && !error && <DataTable
+                  results={results}
+                  onSelect={setSelected}
+                  onAddToPlaylist={handleAddToPlaylist}
+                  playlist={playlist}
+                />}
+              </div>
+            </>
+          ) : page === "home" ? (
+            <div className="home-hero">
+              <h2>Welcome to PaneStify</h2>
+              <p className="muted">Explore music with the iTunes API. Click <button className="btn small" onClick={() => setPage("search")}>Search</button> to get started.</p>
+            </div>
+          ) : page === "library" ? (
+            <div className="library-view">
+              <h2>Your Library</h2>
+              <div className="playlist-card">
+                <h3>Current Playlist</h3>
+                {playlist.length === 0 && <p className="muted">No tracks yet. Add songs from Search.</p>}
+                <ul className="playlist-list">
+                  {playlist.map((t) => (
+                    <li key={t.trackId ?? t.collectionId ?? t.artistId + t.trackName} className="playlist-item">
+                      <img src={t.artworkUrl60} alt={t.trackName} />
+                      <div className="meta">
+                        <div className="title">{t.trackName ?? t.collectionName}</div>
+                        <div className="sub">{t.artistName}</div>
+                      </div>
+                      <div className="controls">
+                        {t.previewUrl ? (
+                          <audio controls src={t.previewUrl} preload="none" />
+                        ) : null}
+                        <button className="btn small danger" onClick={() => handleRemoveFromPlaylist(t)}>Remove</button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            /* Playlist shortcuts (liked/chill/top/mix) */
+            <div className="playlist-shortcut-view">
+              <h2>{page === "liked" ? "Liked Songs" : page === "chill" ? "Chill Vibes" : page === "top" ? "Top Hits" : "My Mix"}</h2>
+              <p className="muted">This view shows your current playlist. You can add tracks from Search.</p>
+              <div className="playlist-card">
+                <h3>Playlist</h3>
+                {playlist.length === 0 && <p className="muted">No tracks yet. Add songs from results.</p>}
+                <ul className="playlist-list">
+                  {playlist.map((t) => (
+                    <li key={t.trackId ?? t.collectionId ?? t.artistId + t.trackName} className="playlist-item">
+                      <img src={t.artworkUrl60} alt={t.trackName} />
+                      <div className="meta">
+                        <div className="title">{t.trackName ?? t.collectionName}</div>
+                        <div className="sub">{t.artistName}</div>
+                      </div>
+                      <div className="controls">
+                        {t.previewUrl ? (
+                          <audio controls src={t.previewUrl} preload="none" />
+                        ) : null}
+                        <button className="btn small danger" onClick={() => handleRemoveFromPlaylist(t)}>Remove</button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
           <div className="sort-row">
             <label>
               Sort by:
