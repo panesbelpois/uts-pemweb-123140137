@@ -150,6 +150,17 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
 .track-title { font-weight:600; cursor:pointer; color:#4b0026; }
 .track-title:focus, .track-title:hover { text-decoration: underline; outline:none; }
 
+/* Accessible focus styles */
+.track-title:focus-visible {
+  outline: 3px solid rgba(255,43,122,0.18);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(255,43,122,0.18);
+  outline-offset: 2px;
+}
+
 /* Detail and playlist (right) */
 .detail-card, .playlist-card { background: var(--card-bg); padding:12px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 12px; }
 .detail-inner { display:flex; gap:12px; align-items:flex-start; }

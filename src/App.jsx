@@ -59,14 +59,22 @@ export default function App() {
       const url = `https://itunes.apple.com/search?${params.toString()}`;
       try {
         const res = await fetch(url, { signal: controller.signal });
-        if (!res.ok) throw new Error("Network response not ok");
+        if (!res.ok) throw new Error(`Network response not ok (${res.status} ${res.statusText}) for ${url}`);
         const data = await res.json();
-        const results = (data.results || []).map(item => ({
-          ...item,
-        }));
+        // Client-side genre filtering: iTunes Search doesn't accept free-text `genre` param reliably,
+        // so filter results locally when the user selected a genre.
+        let items = (data.results || []);
+        if (genre) {
+          const g = genre.toLowerCase();
+          items = items.filter(it => (it.primaryGenreName || "").toLowerCase().includes(g));
+        }
+        const results = items.map(item => ({ ...item }));
         setResults(results);
       } catch (err) {
-        if (err.name !== "AbortError") setError(err.message);
+        if (err.name !== "AbortError") {
+          // Keep error message informative for debugging
+          setError(err.message || String(err));
+        }
       } finally {
         setLoading(false);
       }
