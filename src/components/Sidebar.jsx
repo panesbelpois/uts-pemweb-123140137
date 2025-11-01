@@ -13,7 +13,18 @@ const PLAYLIST_SHORTCUTS = [
   { id: "mix", label: "My Mix" },
 ];
 
-export default function Sidebar({ active, onNavigate }) {
+export default function Sidebar({ active, onNavigate, playlists = {}, onSelectPlaylist, onCreatePlaylist }) {
+  const [newName, setNewName] = React.useState("");
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    const name = (newName || "New Playlist").trim();
+    if (name) {
+      onCreatePlaylist && onCreatePlaylist(name);
+      setNewName("");
+    }
+  };
+
   return (
     <div className="sidebar-inner">
       <div className="logo">PaneStify</div>
@@ -28,12 +39,17 @@ export default function Sidebar({ active, onNavigate }) {
       <div className="playlists">
         <h4>Playlists</h4>
         <ul>
-          {PLAYLIST_SHORTCUTS.map(p => (
-            <li key={p.id}>
-              <button type="button" className={`nav-item playlist-link ${active === p.id ? "active" : ""}`} onClick={() => onNavigate && onNavigate(p.id)}>{p.label}</button>
+          {Object.keys(playlists).map((name) => (
+            <li key={name}>
+              <button type="button" className={`nav-item playlist-link ${active === name ? "active" : ""}`} onClick={() => onSelectPlaylist && onSelectPlaylist(name)}>{name}</button>
             </li>
           ))}
         </ul>
+
+        <form onSubmit={handleCreate} style={{ marginTop: 12 }}>
+          <input aria-label="New playlist name" value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Create playlist..." />
+          <button type="submit" className="btn small" style={{ marginLeft: 8 }}>Add</button>
+        </form>
       </div>
 
       <div className="sidebar-footer">

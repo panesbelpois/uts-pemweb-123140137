@@ -1,20 +1,30 @@
-const KEY = "music_explorer_playlist_v1";
+const KEY = "music_explorer_playlists_v1";
 
-export function loadPlaylistFromStorage() {
+// Returns an object mapping playlistName -> array of tracks
+export function loadPlaylistsFromStorage() {
   try {
     const raw = localStorage.getItem(KEY);
-    if (!raw) return [];
-    return JSON.parse(raw);
+    if (!raw) return { "My Playlist": [] };
+    const parsed = JSON.parse(raw);
+    // Backwards compatibility: if previously stored a single array, wrap it
+    if (Array.isArray(parsed)) return { "My Playlist": parsed };
+    return parsed;
   } catch (e) {
-    console.error("loadPlaylistFromStorage error", e);
-    return [];
+    console.error("loadPlaylistsFromStorage error", e);
+    return { "My Playlist": [] };
   }
 }
 
-export function savePlaylistToStorage(playlist) {
+export function savePlaylistsToStorage(playlists) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(playlist));
+    localStorage.setItem(KEY, JSON.stringify(playlists));
   } catch (e) {
-    console.error("savePlaylistToStorage error", e);
+    console.error("savePlaylistsToStorage error", e);
   }
+}
+
+// Helper: ensure playlist exists
+export function ensurePlaylist(playlists, name) {
+  if (!playlists[name]) playlists[name] = [];
+  return playlists;
 }
