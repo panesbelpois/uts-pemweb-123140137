@@ -52,9 +52,14 @@ export default function DataTable({ results, onSelect, onAddToPlaylist, playlist
               </td>
               <td>
                 <button
-                  className={`btn small ghost ${playlist.some(p => (p.trackId ?? p.collectionId) === (item.trackId ?? item.collectionId)) ? "liked" : ""}`}
-                  onClick={() => onAddToPlaylist(item, "Liked Songs")}
-                  title="Add to Liked Songs"
+                  className={`btn small ghost ${isLiked(item) ? "liked" : ""}`}
+                  onClick={() => {
+                    const id = item.trackId ?? item.collectionId;
+                    if (!isLiked(item)) {
+                      onAddToPlaylist(item, true); // true indicates direct add to Liked Songs
+                    }
+                  }}
+                  title={isLiked(item) ? "In Liked Songs" : "Add to Liked Songs"}
                 >
                   ♥
                 </button>

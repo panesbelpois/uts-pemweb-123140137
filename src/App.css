@@ -15,53 +15,121 @@
 }
 
 * { box-sizing: border-box; }
-html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#fff 0%, #fff0f6 100%); color: #2a1a24; }
+html,body { height: 100%; margin: 0; }
 
-.app-container { max-width: var(--max-width); margin: 24px auto; padding: 16px; }
-
-/* Spotify-like dark theme wrapper */
-.spotify-app {
-  max-width: 1400px; /* allow wider layout */
-  margin: 16px auto;
-  padding: 0; /* full-bleed feel inside */
-  background: linear-gradient(180deg,#fff 0%, #fff0f6 40%, #ffeef8 100%);
+#root { 
+  height: 100vh;
+  background: linear-gradient(135deg, #fff9fc 0%, #fff0f6 50%, #ffe4f2 100%);
   color: #2a1a24;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(255,43,122,0.08);
+  padding: 0;
+  overflow: hidden;
 }
 
-.spotify-app .header { background: linear-gradient(90deg,var(--pink-100), var(--pink-300)); padding: 18px 28px; border-radius: 8px 8px 0 0; }
+.app-container { 
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Spotify-like theme wrapper */
+.spotify-app {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  color: #2a1a24;
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 30px rgba(255,43,122,0.08),
+    inset 0 0 0 1px rgba(255,255,255,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.spotify-app .header { background: linear-gradient(90deg,var(--pink-100), var(--pink-300)); padding: 18px 28px; }
 
 /* Header */
 .header {
   background: linear-gradient(90deg,var(--pink-100), var(--pink-300));
-  border-radius: 16px;
   padding: 16px;
   box-shadow: var(--shadow);
-  margin-bottom: 16px;
 }
-.header-inner h1 { margin:0; font-size: 1.6rem; color: #4b0026; }
-.tagline { margin:4px 0 0; color: var(--muted); }
+.header-inner {
+  padding: 0 24px;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-content h1 { 
+  margin: 0; 
+  font-size: 1.6rem; 
+  color: #4b0026;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.tagline { 
+  margin: 0;
+  color: var(--muted);
+}
+.header-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
 
 /* Layout */
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 16px;
+  height: calc(100vh - 60px); /* Account for header height */
+  overflow: hidden;
 }
 
 /* When using spotify-app, change grid to include sidebar */
 .spotify-app .main-grid {
   grid-template-columns: 220px 1fr 360px;
-  gap: 20px;
-  align-items: start;
+  gap: 0;
+  height: calc(100vh - 60px); /* Account for header height */
 }
-.left-panel { background: linear-gradient(180deg,#ffffff, #fff7fb); padding: 12px; border-radius: var(--radius); }
-.content-area { background: transparent; padding: 28px; }
-.right-panel { padding: 12px; }
+.left-panel { 
+  background: rgba(255, 255, 255, 0.5);
+  padding: 12px;
+  backdrop-filter: blur(8px);
+  height: 100%;
+  overflow-y: auto;
+}
+.content-area { 
+  background: rgba(255, 255, 255, 0.3);
+  padding: 28px;
+  backdrop-filter: blur(8px);
+  height: 100%;
+  overflow-y: auto;
+}
+.right-panel { 
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  height: 100%;
+  overflow-y: auto;
+}
 
 /* Sidebar styling for spotify theme */
-.spotify-sidebar { background: transparent; padding: 0 0 20px 0; }
+.spotify-sidebar { 
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0;
+  backdrop-filter: blur(8px);
+  height: 100%;
+  overflow-y: auto;
+}
 .sidebar-inner { padding: 22px 18px; color: #4b0026; min-height: 420px; }
 .sidebar-inner .logo { font-weight: 800; font-size: 1.25rem; color: var(--pink-500); margin-bottom: 18px; }
 .sidebar-inner .nav { list-style: none; padding: 0; margin: 0 0 18px 0; }
@@ -101,17 +169,70 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
 .playlist-nav .nav-link {
   font-weight: 500;
   padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlist-row { display:flex; align-items:center; gap:8px; }
+.playlist-row .delete-playlist {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.playlist-row .delete-playlist:hover { background: rgba(255,43,122,0.06); }
+
+.btn.danger-outline { background: var(--pink-500); border: 1px solid var(--pink-500); color: white; }
+
+/* Library add form */
+.library-add-form {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin: 12px 0 16px 0;
+}
+.library-add-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,43,122,0.12);
+  background: white;
+  color: #4b0026;
+}
+.library-add-input:focus { box-shadow: 0 0 0 3px rgba(255,43,122,0.08); border-color: var(--pink-400); }
+
+.nav-link .icon {
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottom section with create form and footer */
+.bottom-section {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid rgba(255,43,122,0.1);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
 }
 
 /* Create playlist form */
 .create-playlist-form {
-  padding: 0 6px;
+  margin-bottom: 16px;
 }
+
 .input-group {
   display: flex;
   gap: 6px;
-  margin-top: 8px;
 }
+
 .playlist-input {
   flex: 1;
   padding: 8px 12px;
@@ -121,24 +242,34 @@ html,body,#root { height: 100%; margin: 0; background: linear-gradient(180deg,#f
   color: #4b0026;
   font-size: 0.9rem;
 }
+
 .playlist-input:focus {
   outline: none;
   border-color: rgba(255,43,122,0.3);
   background: #fff;
+  box-shadow: 0 2px 8px rgba(255,43,122,0.08);
 }
+
 .create-btn {
-  padding: 8px 16px !important;
-  font-size: 0.9rem !important;
-  background: rgba(255,43,122,0.08) !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  font-size: 1.2rem !important;
+  background: var(--pink-500) !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
 }
+
 .create-btn:hover {
-  background: rgba(255,43,122,0.15) !important;
+  background: var(--pink-400) !important;
+  transform: translateY(-1px);
 }
 
 /* Sidebar Footer */
 .sidebar-footer {
-  margin-top: 24px;
-  padding: 16px 12px;
   color: #7a2b45;
   font-size: 0.85rem;
   opacity: 0.8;

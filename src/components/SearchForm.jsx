@@ -29,7 +29,6 @@ export default function SearchForm({ onSearch, loading, focus }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Basic client-side validation: HTML5 will handle required
     if (!form.term.trim()) return;
     onSearch({
       term: form.term.trim(),
