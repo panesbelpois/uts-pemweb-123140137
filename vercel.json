@@ -1,25 +1,11 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "package.json",
-      "use": "@vercel/node",
-      "config": { "maxLambdaSize": "15mb" }
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
+  "env": {
+    "NODE_ENV": "production"
   }
 }
