@@ -106,7 +106,7 @@ Pengguna dapat melakukan export dan langsung terdownload dalam format json.
 
 ## Deployment
 Aplikasi dapat diakses online melalui:  
-[https://uts-pemweb-123140137.vercel.app](https://uts-pemweb-123140137.vercel.app)
+[https://uts-pemweb-123140137.vercel.app](https://uts-pemweb-123140137-pz9v.vercel.app/)
 
 ## Struktur Project
 ```
