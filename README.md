@@ -24,7 +24,7 @@ PaneStify adalah aplikasi web untuk mencari dan mengelola musik menggunakan iTun
 ## Fitur Utama
 1. **Form Pencarian Lengkap:**
    - Kata kunci pencarian
-   - Tipe media (music, movie, podcast, dll)
+   - Tipe media (music, audiobook, podcast, dll)
    - Genre
    - Limit hasil pencarian
    - Filter konten explicit
